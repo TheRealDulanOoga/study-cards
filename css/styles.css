@@ -1,0 +1,12 @@
+:root {
+  --background-color: rgb(117, 255, 239);
+  --main-color: hsl(194, 74%, 51%);
+  --secondary-color: hsl(182, 98%, 35%);
+  --text-color: hsl(0, 0%, 100%);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  font-size: 30px;
+}

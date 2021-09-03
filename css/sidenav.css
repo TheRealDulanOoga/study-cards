@@ -1,0 +1,35 @@
+.navbar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--main-color);
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+}
+
+.navbar div {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--text-color);
+  background-color: rgba(255, 255, 255, 0);
+  display: block;
+  transition: 0.2s;
+}
+
+.sidenav div:hover {
+  background-color: rgba(255, 255, 255, 70%);
+}
+
+#link-content {
+  transition: margin-left 0.3s;
+  padding: 20px;
+}
+
+.active[data-tab-content] {
+  display: block !important;
+}
