@@ -8,26 +8,30 @@
   background-color: var(--main-color);
   overflow-x: hidden;
   transition: 0.3s;
-  padding-top: 60px;
+  padding-top: 20px;
+  transition: 0.2s;
 }
 
 .navbar div {
-  padding: 8px 8px 8px 32px;
+  padding: 20px 28px;
   text-decoration: none;
   font-size: 25px;
   color: var(--text-color);
   background-color: rgba(255, 255, 255, 0);
   display: block;
-  transition: 0.2s;
 }
 
-.sidenav div:hover {
-  background-color: rgba(255, 255, 255, 70%);
+.navbar div:hover {
+  background-color: rgba(255, 255, 255, 30%);
 }
 
 #link-content {
   transition: margin-left 0.3s;
   padding: 20px;
+}
+
+[data-tab-content] {
+  display: none;
 }
 
 .active[data-tab-content] {
