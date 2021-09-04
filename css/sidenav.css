@@ -9,7 +9,6 @@
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 20px;
-  transition: 0.2s;
 }
 
 .navbar div {
@@ -19,6 +18,7 @@
   color: var(--text-color);
   background-color: rgba(255, 255, 255, 0);
   display: block;
+  transition: 0.2s;
 }
 
 .navbar div:hover {
