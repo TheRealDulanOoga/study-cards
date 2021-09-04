@@ -48,7 +48,7 @@ body {
 
 #link-content {
   transition: margin-left 0.3s;
-  padding: 20px;
+  padding: 30px;
 }
 
 [data-tab-content] {

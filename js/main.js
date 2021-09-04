@@ -37,37 +37,37 @@ const OPEN_NAVBAR_BUTTONS = document.querySelectorAll("[class=open-navbar-button
 const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
 
 NAVBAR_LINKS.forEach(tab => {
-     tab.addEventListener('click', () => {
-          const target = document.querySelector(tab.dataset.tabTarget);
-          LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
-          NAVBAR_LINKS.forEach(tabX => tabX.classList.remove("active"))
-          target.classList.add("active");
-          tab.classList.add("active")
-     });
+	tab.addEventListener('click', () => {
+		const target = document.querySelector(tab.dataset.tabTarget);
+		LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
+		NAVBAR_LINKS.forEach(tabX => tabX.classList.remove("active"))
+		target.classList.add("active");
+		tab.classList.add("active")
+	});
 });
 
 OPEN_NAVBAR_BUTTONS.forEach(button => {
-     button.addEventListener('click', () => {
-          if (NAVBAR.classList.contains("closed")) {
-               openNavBar();
-          } else closeNavBar();
-     });
+	button.addEventListener('click', () => {
+		if (NAVBAR.classList.contains("closed")) {
+			openNavBar();
+		} else closeNavBar();
+	});
 });
 
 CLOSE_NAVBAR_BUTTON.addEventListener('click', () => {
-     closeNavBar();
+	closeNavBar();
 });
 
 function openNavBar() {
-     NAVBAR.style.width = "80px";
-     MAIN.style.marginLeft = "80px";
-     NAVBAR.classList.add("opened");
-     NAVBAR.classList.remove("closed");
+	NAVBAR.style.width = "80px";
+	MAIN.style.marginLeft = "80px";
+	NAVBAR.classList.add("opened");
+	NAVBAR.classList.remove("closed");
 };
 
 function closeNavBar() {
-     NAVBAR.style.width = "0";
-     MAIN.style.marginLeft = "0";
-     NAVBAR.classList.add("closed");
-     NAVBAR.classList.remove("opened");
+	NAVBAR.style.width = "0";
+	MAIN.style.marginLeft = "0";
+	NAVBAR.classList.add("closed");
+	NAVBAR.classList.remove("opened");
 };
