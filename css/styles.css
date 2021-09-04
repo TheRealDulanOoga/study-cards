@@ -13,19 +13,60 @@ body {
   color: var(--main-color);
 }
 
-#link-content {
+.navbar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--main-color);
+  overflow-x: hidden;
   transition: 0.3s;
+  padding-top: 20px;
 }
 
-.open-navbar-button img {
+.tab.active {
+  background-color: rgba(255, 255, 255, 50%);
+}
+
+.navbar div {
+  padding: 20px 28px;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--text-color);
+  background-color: rgba(255, 255, 255, 0);
+  display: block;
+  transition: 0.2s;
+}
+
+.navbar div:hover {
+  background-color: rgba(255, 255, 255, 50%);
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+#link-content {
+  transition: margin-left 0.3s;
+  padding: 20px;
+}
+
+[data-tab-content] {
+  display: none;
+}
+
+.active[data-tab-content] {
+  display: block !important;
+}
+
+.open-navbar-button {
   width: 50px;
   height: 50px;
   text-decoration: underline !important;
   color: var(--text-color);
 }
 
-.open-navbar-button img:hover,
-.navbar div:hover {
+.open-navbar-button:hover {
   font-weight: bolder;
   cursor: pointer;
   filter: invert(100%);

@@ -39,8 +39,10 @@ const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
 NAVBAR_LINKS.forEach(tab => {
      tab.addEventListener('click', () => {
           const target = document.querySelector(tab.dataset.tabTarget);
-          LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove('active'));
-          target.classList.add('active');
+          LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
+          NAVBAR_LINKS.forEach(tabX => tabX.classList.remove("active"))
+          target.classList.add("active");
+          tab.classList.add("active")
      });
 });
 
