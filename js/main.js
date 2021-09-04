@@ -35,14 +35,17 @@ const NAVBAR_LINKS = document.querySelectorAll("[data-tab-target]");
 const LINK_REFERENCES = document.querySelectorAll("[data-tab-content]");
 const OPEN_NAVBAR_BUTTONS = document.querySelectorAll("[class=open-navbar-button]");
 const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
+const FLASHCARD_GRID = document.getElementById("flashcard-grid");
+
+createHomePageCardDisplay("Auto Generated Card");
 
 NAVBAR_LINKS.forEach(tab => {
 	tab.addEventListener('click', () => {
 		const target = document.querySelector(tab.dataset.tabTarget);
 		LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
-		NAVBAR_LINKS.forEach(tabX => tabX.classList.remove("active"))
+		NAVBAR_LINKS.forEach(tabX => tabX.classList.remove("active"));
 		target.classList.add("active");
-		tab.classList.add("active")
+		tab.classList.add("active");
 	});
 });
 
@@ -59,8 +62,7 @@ CLOSE_NAVBAR_BUTTON.addEventListener('click', () => {
 });
 
 function openNavBar() {
-	NAVBAR.style.width = "80px";
-	MAIN.style.marginLeft = "80px";
+	NAVBAR.style.width = "100px";
 	NAVBAR.classList.add("opened");
 	NAVBAR.classList.remove("closed");
 };
@@ -70,4 +72,16 @@ function closeNavBar() {
 	MAIN.style.marginLeft = "0";
 	NAVBAR.classList.add("closed");
 	NAVBAR.classList.remove("opened");
+};
+
+function createHomePageCardDisplay(mainText) {
+	FLASHCARD_GRID.insertAdjacentHTML("beforeend", 
+	`<div class="flashcard">
+		<div class="big-section">`+ mainText +`</div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>`
+	);
 };
