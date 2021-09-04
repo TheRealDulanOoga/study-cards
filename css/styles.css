@@ -1,12 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,900;1,400;1,900&display=swap");
+
 :root {
-  --background-color: rgb(117, 255, 239);
-  --main-color: hsl(194, 74%, 51%);
-  --secondary-color: hsl(182, 98%, 35%);
+  --background-color: rgb(33, 153, 147);
+  --main-color: hsl(177, 34%, 26%);
   --text-color: hsl(0, 0%, 100%);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: Barlow, Arial;
 }
 
 body {
   font-size: 30px;
+  background-color: var(--background-color);
+  color: var(--main-color);
+}
+
+.open-navbar-button img {
+  width: 50px;
+  height: 50px;
+  text-decoration: underline !important;
+  color: var(--text-color);
+}
+
+.open-navbar-button img:hover,
+.navbar div:hover {
+  font-weight: bolder;
+  cursor: pointer;
+  filter: invert(100%);
 }

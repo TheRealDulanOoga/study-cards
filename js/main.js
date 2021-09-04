@@ -46,7 +46,9 @@ NAVBAR_LINKS.forEach(tab => {
 
 OPEN_NAVBAR_BUTTONS.forEach(button => {
      button.addEventListener('click', () => {
-          openNavBar();
+          if (NAVBAR.classList.contains("closed")) {
+               openNavBar();
+          } else closeNavBar();
      });
 });
 
@@ -55,11 +57,15 @@ CLOSE_NAVBAR_BUTTON.addEventListener('click', () => {
 });
 
 function openNavBar() {
-     NAVBAR.style.width = "250px";
-     MAIN.style.marginLeft = "250px";
+     NAVBAR.style.width = "80px";
+     MAIN.style.marginLeft = "80px";
+     NAVBAR.classList.add("opened");
+     NAVBAR.classList.remove("closed");
 };
 
 function closeNavBar() {
      NAVBAR.style.width = "0";
      MAIN.style.marginLeft = "0";
+     NAVBAR.classList.add("closed");
+     NAVBAR.classList.remove("opened");
 };
