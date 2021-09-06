@@ -1,32 +1,32 @@
 /*
 TODO -->
-*    flash card functionaliy
-          -content array containing items with question and answer perameters
-          -pick random question and display it in a div
-          -when hovering and/or clicking on the tile, it flips or expands to show the answer
-          -be able to choose gamemode
-               -flash cards
-               -quiz
-               -display answer and type question
-          -display correct or incorrect answer
-*    settings
-          -choose color theme presets as well as ability to make custom color theme
-          -be able to make accounts
-          -save settings (with cookies?)
-*    making flash card templates
-          -have layout for creating flash card templates
-          -have option for saving templates with accounts
-*    homepage layout
-          -side navbar
-               -account
-               -settings
-               -create new
-          -grid of your templates
-               -consists of a square with a color or gradient assigned in template settings
-               -settings button
-               -play as flash card button
-               -play as quiz button
-               -play with typing answers button 
+*   flash card functionaliy
+		-content array containing items with question and answer perameters
+		-pick random question and display it in a div
+		-when hovering and/or clicking on the tile, it flips or expands to show the answer
+		-be able to choose gamemode
+			-flash cards
+			-quiz
+			-display answer and type question
+		-display correct or incorrect answer
+*   settings
+		-choose color theme presets as well as ability to make custom color theme
+		-be able to make accounts
+		-save settings (with cookies?)
+*   making flash card templates
+		-have layout for creating flash card templates
+		-have option for saving templates with accounts
+*   homepage layout
+		-side navbar
+			-account
+			-settings
+			-create new
+		-grid of your templates
+			-consists of a square with a color or gradient assigned in template settings
+			-settings button
+			-play as flash card button
+			-play as quiz button
+			-play with typing answers button 
 */
 
 const MAIN = document.getElementById("link-content");
@@ -37,7 +37,34 @@ const OPEN_NAVBAR_BUTTONS = document.querySelectorAll("[class=open-navbar-button
 const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
 const FLASHCARD_GRID = document.getElementById("flashcard-grid");
 
-createHomePageCardDisplay("Auto Generated Card");
+const flashCards = [
+	{
+	"name": "spanish",
+	"definitions": {
+		"hola": "hello",
+		"adios": "goodbye",
+		"que tal": "what's up",
+		"buenos dias": "good morning",
+		"buenos tardes": "good afternoon",
+		"buenos noches": "good night"
+		}
+	},
+
+	{
+	"name": "science",
+	"definitions": {
+		"a tube used to precisely measure liquids": "graduated cylinder",
+		"a stand for a ring, normally used to hold up objects such as wire": "ring stand",
+		"a container for liquids that does not measure precisely": "beaker",
+		"a container for liquids that has a wide bottom and narrow neck": "erlenmeyer flask"
+		}
+	}
+];
+
+flashCards.forEach(card => {
+	createHomePageCardDisplay(card);
+});
+
 
 NAVBAR_LINKS.forEach(tab => {
 	tab.addEventListener('click', () => {
@@ -74,10 +101,10 @@ function closeNavBar() {
 	NAVBAR.classList.remove("opened");
 };
 
-function createHomePageCardDisplay(mainText) {
+function createHomePageCardDisplay(flashCard) {
 	FLASHCARD_GRID.insertAdjacentHTML("beforeend", 
 	`<div class="flashcard">
-		<div class="big-section">`+ mainText +`</div>
+		<div class="big-section">`+ flashCard.name +`</div>
 		<div></div>
 		<div></div>
 		<div></div>

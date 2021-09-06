@@ -23,9 +23,11 @@
 .big-section {
   display: flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
   grid-column: span 4;
   background-color: hsla(189, 75%, 30%, 0.5) !important;
+  padding: 20px;
 }
 
 .flashcard div {
