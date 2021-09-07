@@ -48,7 +48,7 @@ body {
 }
 
 .navbar div {
-  padding: 20px 38px;
+  padding: 35px;
   text-decoration: none;
   font-size: 25px;
   color: var(--text-color);
@@ -61,6 +61,10 @@ body {
   background-color: rgba(255, 255, 255, 50%);
   font-weight: bolder;
   cursor: pointer;
+}
+
+.navbar img {
+  height: 30px;
 }
 
 #link-content {

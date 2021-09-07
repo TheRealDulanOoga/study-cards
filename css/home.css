@@ -1,6 +1,17 @@
+:root {
+  --flashcard-display-column-size: 80px;
+  --flashcard-border-radius: calc(var(--flashcard-display-column-size) / 10);
+  --flashcard-gap-amount: calc(var(--flashcard-display-column-size) / 20);
+  --flashcard-padding-amount: calc(var(--flashcard-display-column-size) / 10);
+  --flashcard-font-size: calc(var(--flashcard-display-column-size) / 2);
+}
+
 .flashcard-grid {
   display: grid;
-  grid-template-columns: repeat(6, 265px);
+  grid-template-columns: repeat(
+    8,
+    calc(var(--flashcard-display-column-size) * 3.3)
+  );
   grid-template-rows: auto;
   margin-top: 50px;
   gap: 50px;
@@ -8,16 +19,18 @@
 
 .flashcard {
   display: grid;
-  grid-template-columns: repeat(4, 57.5px);
-  grid-template-rows: 230px 57.5px;
+  grid-template-columns: repeat(3, var(--flashcard-display-column-size));
+  grid-template-rows:
+    calc(var(--flashcard-display-column-size) * 2.25)
+    var(--flashcard-display-column-size);
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 5px 5px 5px 1px hsla(0, 0%, 0%, 0.5);
   color: var(--text-color);
-  border-radius: 10px;
+  border-radius: var(--flashcard-border-radius);
   font-weight: bolder;
-  font-size: 30px;
-  padding: 10px;
-  gap: 5px;
+  font-size: var(--flashcard-font-size);
+  padding: var(--flashcard-padding-amount);
+  gap: var(--flashcard-gap-amount);
 }
 
 .big-section {
@@ -25,13 +38,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  grid-column: span 4;
+  grid-column: span 3;
   background-color: hsla(189, 75%, 30%, 0.5) !important;
-  padding: 20px;
+  padding: var(--flashcard-padding-amount);
 }
 
 .flashcard div {
   border: 2px solid hsla(0, 0%, 0%, 0.3);
   background-color: var(--main-color);
-  border-radius: 7px;
+  border-radius: var(--flashcard-border-radius);
 }

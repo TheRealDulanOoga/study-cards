@@ -90,6 +90,7 @@ CLOSE_NAVBAR_BUTTON.addEventListener('click', () => {
 
 function openNavBar() {
 	NAVBAR.style.width = "100px";
+	MAIN.style.marginLeft = "100px";
 	NAVBAR.classList.add("opened");
 	NAVBAR.classList.remove("closed");
 };
@@ -105,10 +106,9 @@ function createHomePageCardDisplay(flashCard) {
 	FLASHCARD_GRID.insertAdjacentHTML("beforeend", 
 	`<div class="flashcard">
 		<div class="big-section">`+ flashCard.name +`</div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
+		<div id="edit"></div>
+		<div id="play"></div>
+		<div id="like"></div>
 	</div>`
 	);
 };

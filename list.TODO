@@ -1,0 +1,26 @@
+☐ - [] flash card functionaliy
+    - [] content array containing items with question and answer perameters
+    - [] pick random question and display it in a div
+    - [] when hovering and/or clicking on the tile, it flips or expands to show the answer
+    - [] be able to choose gamemode
+        - [] flash cards
+        - [] quiz
+        - [] display answer and type question
+    - [] display correct or incorrect answer
+- [] settings
+    - [] choose color theme presets as well as ability to make custom color theme
+    - [] be able to make accounts
+    - [] save settings (with cookies?)
+- [] making flash card templates
+    - [] have layout for creating flash card templates
+    - [] have option for saving templates with accounts
+- [] homepage layout
+    ✔ - [] side navbar @done (9/7/2021, 6:22:23 PM)
+        ✔ - [] account @done (9/7/2021, 6:22:25 PM)
+        ✔ - [] settings @done (9/7/2021, 6:22:06 PM)
+        ✔ - [] create new @done (9/7/2021, 6:22:01 PM)
+    ☐ - [] grid of your templates
+        ✔ - [] consists of a square with a color or gradient assigned in template settings @done (9/7/2021, 6:23:30 PM)
+        ☐ - [] settings button
+        ☐ - [] play button
+            ☐ - [] goes to additional menu that allows for gamemode picker
