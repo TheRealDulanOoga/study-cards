@@ -1,50 +1,71 @@
 :root {
-  --flashcard-display-column-size: 80px;
-  --flashcard-border-radius: calc(var(--flashcard-display-column-size) / 10);
-  --flashcard-gap-amount: calc(var(--flashcard-display-column-size) / 20);
-  --flashcard-padding-amount: calc(var(--flashcard-display-column-size) / 10);
-  --flashcard-font-size: calc(var(--flashcard-display-column-size) / 2);
+  --flashcard-display-size: 300px;
+  --flashcard-border-amount: calc(var(--flashcard-display-size) / 35);
 }
 
 .flashcard-grid {
   display: grid;
-  grid-template-columns: repeat(
-    8,
-    calc(var(--flashcard-display-column-size) * 3.3)
-  );
-  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fill, var(--flashcard-display-size));
   margin-top: 50px;
   gap: 50px;
 }
 
 .flashcard {
   display: grid;
-  grid-template-columns: repeat(3, var(--flashcard-display-column-size));
-  grid-template-rows:
-    calc(var(--flashcard-display-column-size) * 2.25)
-    var(--flashcard-display-column-size);
+  grid-template-rows: repeat(
+    4,
+    calc(
+      var(--flashcard-display-size) / 4 - 5px - var(--flashcard-border-amount)
+    )
+  );
+  grid-template-columns: repeat(
+    2,
+    calc(var(--flashcard-display-size) / 2) - 5px -
+      var(--flashcard-border-amount)
+  );
   background-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 5px 5px 5px 1px hsla(0, 0%, 0%, 0.5);
+  box-shadow: var(--flashcard-border-amount) var(--flashcard-border-amount)
+    calc(var(--flashcard-border-amount) / 1.5) 1px hsla(0, 0%, 0%, 0.5);
   color: var(--text-color);
-  border-radius: var(--flashcard-border-radius);
+  border-radius: var(--flashcard-border-amount);
   font-weight: bolder;
-  font-size: var(--flashcard-font-size);
-  padding: var(--flashcard-padding-amount);
-  gap: var(--flashcard-gap-amount);
+  font-size: calc(var(--flashcard-display-size) / 7);
+  padding: var(--flashcard-border-amount);
+  gap: 5px;
 }
 
 .big-section {
+  grid-column: span 2 / auto;
+  grid-row: span 3 / auto;
+}
+
+.flashcard-modifier {
+  font-size: calc(var(--flashcard-border-amount) * 3);
+}
+
+.flashcard-modifier img {
+  filter: invert(100%);
+}
+
+.flashcard-modifier:hover img {
+  filter: opacity(70%);
+}
+
+.big-section,
+.flashcard-modifier {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  grid-column: span 3;
-  background-color: hsla(189, 75%, 30%, 0.5) !important;
-  padding: var(--flashcard-padding-amount);
+  background-color: hsla(0, 0%, 0%, 0.3);
+  border-radius: calc(var(--flashcard-border-amount) / 2);
+  border: 2px solid hsla(0, 0%, 0%, 0.3);
+  transition: 0.3s;
 }
 
-.flashcard div {
-  border: 2px solid hsla(0, 0%, 0%, 0.3);
-  background-color: var(--main-color);
-  border-radius: var(--flashcard-border-radius);
+.big-section:hover,
+.flashcard-modifier:hover {
+  cursor: pointer;
+  background-color: var(--text-color);
+  color: var(--main-color);
 }

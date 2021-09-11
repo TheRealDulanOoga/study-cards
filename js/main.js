@@ -89,26 +89,33 @@ CLOSE_NAVBAR_BUTTON.addEventListener('click', () => {
 });
 
 function openNavBar() {
-	NAVBAR.style.width = "100px";
-	MAIN.style.marginLeft = "100px";
-	NAVBAR.classList.add("opened");
-	NAVBAR.classList.remove("closed");
+	setTimeout(function() {
+		NAVBAR.style.height = "70px";
+		MAIN.style.marginTop = "70px";
+		NAVBAR.classList.add("opened");
+		NAVBAR.classList.remove("closed");
+	}, 10)
+	NAVBAR.style.display = "block";
 };
 
 function closeNavBar() {
-	NAVBAR.style.width = "0";
-	MAIN.style.marginLeft = "0";
+	NAVBAR.style.height = "0";
+	MAIN.style.marginTop = "0";
 	NAVBAR.classList.add("closed");
 	NAVBAR.classList.remove("opened");
+	setTimeout(function() {NAVBAR.style.display = "none"}, 120)
 };
 
 function createHomePageCardDisplay(flashCard) {
 	FLASHCARD_GRID.insertAdjacentHTML("beforeend", 
 	`<div class="flashcard">
-		<div class="big-section">`+ flashCard.name +`</div>
-		<div id="edit"></div>
-		<div id="play"></div>
-		<div id="like"></div>
+		<div class="big-section">` + flashCard.name + `</div>
+		<div id="flashcard-like" class="flashcard-modifier">
+			<img src="icons/filled_star.svg" alt="Like"></img>
+		</div>
+		<div id="flashcard-edit" class="flashcard-modifier">
+			<img src="icons/edit.svg" alt="Edit"></img>
+		</div>
 	</div>`
 	);
 };
