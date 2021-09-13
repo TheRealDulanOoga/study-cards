@@ -31,13 +31,14 @@ body {
 }
 
 .navbar {
-  display: none;
+  display: block;
   width: 100%;
   height: 0;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
+  overflow: hidden;
   background-color: var(--main-color);
   transition: 0.3s;
   border-bottom: 3px solid hsla(0, 0%, 0%, 0.3);
@@ -102,4 +103,51 @@ body {
   font-weight: bolder;
   cursor: pointer;
   filter: invert(100%);
+}
+
+.flashcards-quiz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 2;
+  transition: 0.5s;
+}
+
+.quiz-back-button {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  display: flex;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  float: left;
+  background-color: var(--background-color);
+  box-shadow: 2px 2px 4px 1px hsla(0, 0%, 0%, 0.3);
+  transition: 0.3s;
+}
+
+.quiz-back-button:hover {
+  background-color: var(--text-color);
+  cursor: pointer;
+}
+
+.quiz-flashcard-display {
+  position: absolute;
+  width: 50vw;
+  height: 60vh;
+  left: 25vw;
+  border-radius: 10px;
+  border: 5px solid #222;
+  background-color: var(--background-color);
 }

@@ -36,6 +36,8 @@ const LINK_REFERENCES = document.querySelectorAll("[data-tab-content]");
 const OPEN_NAVBAR_BUTTONS = document.querySelectorAll("[class=open-navbar-button]");
 const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
 const FLASHCARD_GRID = document.getElementById("flashcard-grid");
+const QUIZ_GUI = document.getElementById('flashcards-quiz');
+const CLOSE_QUIZ_BUTTON = document.querySelector('.quiz-back-button');
 
 const flashCards = [
 	{
@@ -62,9 +64,11 @@ const flashCards = [
 ];
 
 flashCards.forEach(card => {
-	createHomePageCardDisplay(card);
+	createHomePageCardDisplay(card)
+	let cardSelector = document.querySelector('#'+card.name);
+	let bigSection = cardSelector.querySelector('.big-section');
+	bigSection.addEventListener('click', () => openQuiz(card));
 });
-
 
 NAVBAR_LINKS.forEach(tab => {
 	tab.addEventListener('click', () => {
@@ -78,24 +82,19 @@ NAVBAR_LINKS.forEach(tab => {
 
 OPEN_NAVBAR_BUTTONS.forEach(button => {
 	button.addEventListener('click', () => {
-		if (NAVBAR.classList.contains("closed")) {
-			openNavBar();
-		} else closeNavBar();
+		if (NAVBAR.classList.contains("closed")) openNavBar();
+		else closeNavBar();
 	});
 });
 
-CLOSE_NAVBAR_BUTTON.addEventListener('click', () => {
-	closeNavBar();
-});
+CLOSE_NAVBAR_BUTTON.addEventListener('click', closeNavBar);
+CLOSE_QUIZ_BUTTON.addEventListener('click', closeQuiz);
 
 function openNavBar() {
-	setTimeout(function() {
-		NAVBAR.style.height = "70px";
-		MAIN.style.marginTop = "70px";
-		NAVBAR.classList.add("opened");
-		NAVBAR.classList.remove("closed");
-	}, 10)
-	NAVBAR.style.display = "block";
+	NAVBAR.style.height = "70px";
+	MAIN.style.marginTop = "70px";
+	NAVBAR.classList.add("opened");
+	NAVBAR.classList.remove("closed");
 };
 
 function closeNavBar() {
@@ -103,12 +102,32 @@ function closeNavBar() {
 	MAIN.style.marginTop = "0";
 	NAVBAR.classList.add("closed");
 	NAVBAR.classList.remove("opened");
-	setTimeout(function() {NAVBAR.style.display = "none"}, 120)
 };
+
+function openQuiz(inputCard) {
+	QUIZ_GUI.style.width = "100%";
+	closeNavBar();
+
+	const flashcard = document.querySelector('.quiz-flashcard-display');
+	const definitionCount = Object.keys(inputCard.definitions).length;
+	var randomNumberArray = [];
+	let j;
+	for (let i = 0; i < definitionCount; i++) {
+		do {
+		j = Math.round(Math.random() * definitionCount);
+		} while (!j == 3);
+		randomNumberArray[i] = j;
+	};
+	flashcard.innerHTML = inputCard.name;
+};
+
+function closeQuiz() {
+	QUIZ_GUI.style.width = "0";
+}
 
 function createHomePageCardDisplay(flashCard) {
 	FLASHCARD_GRID.insertAdjacentHTML("beforeend", 
-	`<div class="flashcard">
+	`<div class="flashcard" id="`+flashCard.name+`">
 		<div class="big-section">` + flashCard.name + `</div>
 		<div id="flashcard-like" class="flashcard-modifier">
 			<img src="icons/filled_star.svg" alt="Like"></img>
