@@ -7,6 +7,9 @@ const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
 const FLASHCARD_GRID = document.getElementById("flashcard-grid");
 const QUIZ_GUI = document.getElementById('flashcards-quiz');
 const CLOSE_QUIZ_BUTTON = document.querySelector('.quiz-back-button');
+const NEW_FLASHCARD_FORM_GUI = document.getElementById('new-flashcard-form');
+const NEW_FLASHCARD_BUTTON = document.getElementById('new-flashcard-button');
+const CLOSE_NEW_FLASHCARD_FORM_BUTTON = document.querySelector('.new-card-back-button');
 const FLASHCARD_DISPLAY = document.querySelector('.quiz-flashcard-display');
 
 const flashCards = [
@@ -67,6 +70,8 @@ var openQuizEventController;
 
 CLOSE_NAVBAR_BUTTON.addEventListener('click', closeNavBar);
 CLOSE_QUIZ_BUTTON.addEventListener('click', closeQuiz);
+CLOSE_NEW_FLASHCARD_FORM_BUTTON.addEventListener('click', closeNewFlashcardForm);
+NEW_FLASHCARD_BUTTON.addEventListener('click', openNewFlashcardForm);
 
 flashCards.forEach(card => {
 	createHomePageCardDisplay(card);
@@ -76,13 +81,15 @@ flashCards.forEach(card => {
 });
 
 NAVBAR_LINKS.forEach(tab => {
-	tab.addEventListener('click', () => {
-		const target = document.querySelector(tab.dataset.tabTarget);
-		LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
-		NAVBAR_LINKS.forEach(link => link.classList.remove("active"));
-		target.classList.add("active");
-		tab.classList.add("active");
-	});
+	if (!(tab.id === 'close-navbar-button' || tab.id === 'new-flashcard-button')) {
+		tab.addEventListener('click', () => {
+			const target = document.querySelector(tab.dataset.tabTarget);
+			LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
+			NAVBAR_LINKS.forEach(link => link.classList.remove("active"));
+			target.classList.add("active");
+			tab.classList.add("active");
+		});
+	};
 });
 
 OPEN_NAVBAR_BUTTONS.forEach(button => {
@@ -138,6 +145,52 @@ function closeQuiz() {
 	QUIZ_GUI.style.width = "0";
 	openQuizEventController.abort();
 }
+
+function openNewFlashcardForm() {
+	NEW_FLASHCARD_FORM_GUI.style.width = "100%";
+	const form = NEW_FLASHCARD_FORM_GUI.querySelector("form");
+	form.innerHTML = `
+		<div id="inputs">
+			<input type="text" name="name" placeholder="Flashcard Name" required />
+			<div>
+				<input type="text" name="definition-1" placeholder="Definition #1" required />
+				<input type="text" name="answer-1" placeholder="Answer #1" required />
+			</div>
+		</div>
+		<div class="form-modifier-buttons">
+			<div id="add-list-definitions">
+				<img src="icons/add.svg" alt="Add Flashcard"/>
+			</div>
+			<div id="remove-list-definitions">
+				<img src="icons/remove.svg" alt="Add Flashcard"/>
+			</div>
+			<input type="submit">
+		</div>`;
+	var definitionInputsAmount = 1;
+	const formInputs = NEW_FLASHCARD_FORM_GUI.querySelector("#inputs");
+
+	document.querySelector('#add-list-definitions').addEventListener('click', () => {
+		definitionInputsAmount++;
+		formInputs.insertAdjacentHTML("beforeend",
+		`<div id="input-` + definitionInputsAmount + `">
+			<input type="text" name="definition-` + definitionInputsAmount + `" placeholder="Definition #` + definitionInputsAmount + `" required />
+			<input type="text" name="answer-` + definitionInputsAmount + `" placeholder="Answer #` + definitionInputsAmount + `" required />
+		</div>`
+		);
+	});
+	document.querySelector('#remove-list-definitions').addEventListener('click', () => {
+		let divToRemove = document.querySelector('#input-' + definitionInputsAmount);
+		try {
+			formInputs.removeChild(divToRemove);
+			definitionInputsAmount--;
+		} catch (error) {};
+	});
+	closeNavBar();
+};
+
+function closeNewFlashcardForm() {
+	NEW_FLASHCARD_FORM_GUI.style.width = "0";
+};
 
 function createHomePageCardDisplay(flashCard) {
 	FLASHCARD_GRID.insertAdjacentHTML("beforeend", 

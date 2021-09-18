@@ -73,7 +73,8 @@ body {
   height: 30px;
 }
 
-#close-navbar-button {
+#close-navbar-button,
+#new-flashcard-button {
   float: right;
   border-left: 3px solid hsla(0, 0%, 0%, 0.3);
   border-right: none !important;
@@ -143,6 +144,10 @@ body {
 }
 
 .quiz-flashcard-display {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   width: 50vw;
   height: 60vh;
@@ -150,4 +155,81 @@ body {
   border-radius: 10px;
   border: 5px solid #222;
   background-color: var(--background-color);
+}
+
+.new-flashcard-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 2;
+  transition: 0.5s;
+}
+
+.new-card-back-button {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  display: flex;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  float: left;
+  background-color: var(--background-color);
+  box-shadow: 2px 2px 4px 1px hsla(0, 0%, 0%, 0.3);
+  transition: 0.3s;
+}
+
+.new-card-back-button:hover {
+  background-color: var(--text-color);
+  cursor: pointer;
+}
+
+input[type="text"] {
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: none;
+  transition: 0.3s;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-color);
+}
+
+input[type="submit"] {
+  width: 150px !important;
+}
+.form-modifier-buttons {
+  display: flex;
+}
+
+.form-modifier-buttons > * {
+  height: 50px;
+  width: 50px;
+  margin: 50px 15px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  border: none;
+  box-shadow: 2px 2px 4px 1px hsla(0, 0%, 0%, 0.3);
+  transition: 0.3s;
+}
+
+.form-modifier-buttons > *:hover {
+  background-color: var(--text-color);
+  cursor: pointer;
 }
