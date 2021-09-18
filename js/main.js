@@ -1,34 +1,3 @@
-/*
-TODO -->
-*   flash card functionaliy
-		-content array containing items with question and answer perameters
-		-pick random question and display it in a div
-		-when hovering and/or clicking on the tile, it flips or expands to show the answer
-		-be able to choose gamemode
-			-flash cards
-			-quiz
-			-display answer and type question
-		-display correct or incorrect answer
-*   settings
-		-choose color theme presets as well as ability to make custom color theme
-		-be able to make accounts
-		-save settings (with cookies?)
-*   making flash card templates
-		-have layout for creating flash card templates
-		-have option for saving templates with accounts
-*   homepage layout
-		-side navbar
-			-account
-			-settings
-			-create new
-		-grid of your templates
-			-consists of a square with a color or gradient assigned in template settings
-			-settings button
-			-play as flash card button
-			-play as quiz button
-			-play with typing answers button 
-*/
-
 const MAIN = document.getElementById("link-content");
 const NAVBAR = document.getElementById("navbar");
 const NAVBAR_LINKS = document.querySelectorAll("[data-tab-target]");
@@ -38,43 +7,79 @@ const CLOSE_NAVBAR_BUTTON = document.getElementById("close-navbar-button");
 const FLASHCARD_GRID = document.getElementById("flashcard-grid");
 const QUIZ_GUI = document.getElementById('flashcards-quiz');
 const CLOSE_QUIZ_BUTTON = document.querySelector('.quiz-back-button');
+const FLASHCARD_DISPLAY = document.querySelector('.quiz-flashcard-display');
 
 const flashCards = [
 	{
 	"name": "spanish",
-	"definitions": {
-		"hola": "hello",
-		"adios": "goodbye",
-		"que tal": "what's up",
-		"buenos dias": "good morning",
-		"buenos tardes": "good afternoon",
-		"buenos noches": "good night"
-		}
+	"definitions": [
+			{
+			definition: "hola",
+			answer: "hello"
+			},
+			{
+			definition: "adios",
+			answer: "goodbye"
+			},
+			{
+			definition: "que tal",
+			answer: "what's up"
+			},
+			{
+			definition: "buenos dias",
+			answer: "good morning"
+			},
+			{
+			definition: "buenas tardes",
+			answer: "good afternoon"
+			},
+			{
+			definition: "buenas noches",
+			answer: "good night"
+			}
+		]
 	},
 
 	{
 	"name": "science",
-	"definitions": {
-		"a tube used to precisely measure liquids": "graduated cylinder",
-		"a stand for a ring, normally used to hold up objects such as wire": "ring stand",
-		"a container for liquids that does not measure precisely": "beaker",
-		"a container for liquids that has a wide bottom and narrow neck": "erlenmeyer flask"
-		}
+	"definitions": [
+			{
+			definition: "a tube used to precisely measure liquids",
+			answer: "graduated cylinder"
+			},
+			{
+			definition: "a stand for a ring, normally used to hold up objects such as wire",
+			answer: "ring stand"
+			},
+			{
+			definition: "a container for liquids that does not measure precisely",
+			answer: "beaker"
+			},
+			{
+			definition: "a container for liquids that has a wide bottom and narrow neck",
+			answer: "erlenmeyer flask"
+			},
+		]
 	}
 ];
 
+var openQuizEventController;
+
+CLOSE_NAVBAR_BUTTON.addEventListener('click', closeNavBar);
+CLOSE_QUIZ_BUTTON.addEventListener('click', closeQuiz);
+
 flashCards.forEach(card => {
-	createHomePageCardDisplay(card)
-	let cardSelector = document.querySelector('#'+card.name);
+	createHomePageCardDisplay(card);
+	let cardSelector = document.querySelector('#' + card.name);
 	let bigSection = cardSelector.querySelector('.big-section');
-	bigSection.addEventListener('click', () => openQuiz(card));
+	bigSection.addEventListener('click', openQuiz.bind(null, card));
 });
 
 NAVBAR_LINKS.forEach(tab => {
 	tab.addEventListener('click', () => {
 		const target = document.querySelector(tab.dataset.tabTarget);
 		LINK_REFERENCES.forEach(tabContent => tabContent.classList.remove("active"));
-		NAVBAR_LINKS.forEach(tabX => tabX.classList.remove("active"));
+		NAVBAR_LINKS.forEach(link => link.classList.remove("active"));
 		target.classList.add("active");
 		tab.classList.add("active");
 	});
@@ -86,9 +91,6 @@ OPEN_NAVBAR_BUTTONS.forEach(button => {
 		else closeNavBar();
 	});
 });
-
-CLOSE_NAVBAR_BUTTON.addEventListener('click', closeNavBar);
-CLOSE_QUIZ_BUTTON.addEventListener('click', closeQuiz);
 
 function openNavBar() {
 	NAVBAR.style.height = "70px";
@@ -107,22 +109,34 @@ function closeNavBar() {
 function openQuiz(inputCard) {
 	QUIZ_GUI.style.width = "100%";
 	closeNavBar();
-
-	const flashcard = document.querySelector('.quiz-flashcard-display');
-	const definitionCount = Object.keys(inputCard.definitions).length;
+	var definitionCount = inputCard.definitions.length;
 	var randomNumberArray = [];
-	let j;
+	var clickCount = 1;
+	var j = 0;
 	for (let i = 0; i < definitionCount; i++) {
-		do {
-		j = Math.round(Math.random() * definitionCount);
-		} while (!j == 3);
-		randomNumberArray[i] = j;
+		if (randomNumberArray.includes(j)) {
+			i--;
+		} else {
+			randomNumberArray.push(j);
+		};
+		j = Math.floor(getRandomMinMax(0, definitionCount));
 	};
-	flashcard.innerHTML = inputCard.name;
+	FLASHCARD_DISPLAY.innerHTML = inputCard.definitions[randomNumberArray[0]].definition;
+	openQuizEventController = new AbortController();
+	document.addEventListener('keyup', e => {
+		if (e.code === 'Enter' || e.code === 'Space') {
+			e.preventDefault;
+			if (clickCount % 2 === 0) {
+				FLASHCARD_DISPLAY.innerHTML = inputCard.definitions[randomNumberArray[clickCount / 2]].definition;
+			} else FLASHCARD_DISPLAY.innerHTML += ' = ' + inputCard.definitions[randomNumberArray[(clickCount - 1) / 2]].answer;
+			clickCount = (clickCount + 1) % (definitionCount * 2);
+		};
+	}, { signal: openQuizEventController.signal});
 };
 
 function closeQuiz() {
 	QUIZ_GUI.style.width = "0";
+	openQuizEventController.abort();
 }
 
 function createHomePageCardDisplay(flashCard) {
@@ -138,3 +152,15 @@ function createHomePageCardDisplay(flashCard) {
 	</div>`
 	);
 };
+
+function getRandomMinMax(min, max) {
+	return Math.random() * (max - min) + min;
+};
+
+// function removeListeners(object, listenerType, extraPerams) {
+// 	object.addEventListener(listenerType, stopProp, extraPerams);
+// };
+
+// function stopProp(e) {
+//     e.stopImmediatePropagation();
+// };
